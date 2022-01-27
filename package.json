@@ -1,0 +1,39 @@
+{
+    "name": "cpweb",
+    "version": "1.0.0",
+    "description": "Query solving website for cpe'rs",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/koushal2001/cpweb.git"
+    },
+    "author": "Koushal Bhat",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/koushal2001/cpweb/issues"
+    },
+    "homepage": "https://github.com/koushal2001/cpweb#readme",
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    },
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cloudinary": "^1.28.1",
+        "cookie-session": "^2.0.0",
+        "crypto": "^1.0.1",
+        "dotenv": "^14.3.2",
+        "express": "^4.17.2",
+        "express-fileupload": "^1.2.1",
+        "install": "^0.13.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.8",
+        "npm": "^8.3.2",
+        "passport": "^0.5.2",
+        "passport-google-oauth20": "^2.0.0",
+        "validator": "^13.7.0"
+    }
+}
