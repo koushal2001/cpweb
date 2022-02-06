@@ -4,5 +4,6 @@ exports.googlelogin = async(req, res) => {
 };
 
 exports.callback = async(req, res) => {
-    res.send(req.user);
+    const jwt = await req.user.gettoken();
+    res.send(jwt);
 }
