@@ -21,9 +21,11 @@ app.use(express.json()) // json desconstruter
 const signup = require("./routes/signuproute");
 const login = require("./routes/loginroutes");
 const update = require("./routes/update");
+const question = require("./routes/question");
 app.use("/register", signup);
 app.use("/login", login);
 app.use("/update", update);
+app.use("/question", question)
 app.get("/testprivate", auth, (req, res) => {
     res.send("test  private route");
 })
