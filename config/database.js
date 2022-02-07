@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { MONGO_LOCAL } = process.env;
+const { MONGO_ONLINE } = process.env;
 exports.connect = () => {
-    mongoose.connect(MONGO_LOCAL, {
+    mongoose.connect(MONGO_ONLINE, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })

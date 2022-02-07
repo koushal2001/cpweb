@@ -19,10 +19,11 @@ app.use(fileupload({
 app.use(express.json()) // json desconstruter
 
 const signup = require("./routes/signuproute");
-const login = require("./routes/loginroutes")
+const login = require("./routes/loginroutes");
+const update = require("./routes/update");
 app.use("/register", signup);
 app.use("/login", login);
-
+app.use("/update", update);
 app.get("/testprivate", auth, (req, res) => {
     res.send("test  private route");
 })

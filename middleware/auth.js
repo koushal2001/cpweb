@@ -7,7 +7,7 @@ const auth = async(req, res, next) => {
         }
 
         const decoded = await jwt.verify(header, (process.env.SECRET_KEY));
-        req.user = decoded.user;
+        req.id = decoded.id;
         next();
     } catch (error) {
         return res.status(500).json({ msg: "Server Error" });
