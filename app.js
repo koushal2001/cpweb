@@ -20,13 +20,15 @@ app.use(express.json()) // json desconstruter
 
 const signup = require("./routes/signuproute");
 const login = require("./routes/loginroutes");
-const update = require("./routes/update");
-const question = require("./routes/question");
+const update = require("./routes/updateroutes");
+const question = require("./routes/questionroutes");
+const answer = require("./routes/answerroutes");
 app.use("/register", signup);
 app.use("/login", login);
 app.use("/update", update);
-app.use("/question", question)
-app.get("/testprivate", auth, (req, res) => {
-    res.send("test  private route");
-})
+app.use("/question", question);
+app.use("/answer", answer)
+    // app.get("/testprivate", auth, (req, res) => {
+    //     res.send("test  private route");
+    // })
 module.exports = app;

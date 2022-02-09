@@ -1,6 +1,6 @@
+const { randomFill } = require("crypto");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-
 const question = new Schema({
     url: {
         type: String,
@@ -21,11 +21,17 @@ const question = new Schema({
         type: String,
         required: true,
     },
-    upvote: {
-        type: String,
-    },
-    downvote: {
-        type: String,
-    }
+    upvote: [{
+        type: Schema.Types.ObjectId,
+        required: true
+    }],
+    downvote: [{
+        type: Schema.Types.ObjectId,
+        required: true
+    }]
 });
+
+
+
+
 module.exports = mongoose.model("question", question);

@@ -18,11 +18,13 @@ const answer = new Schema({
         type: String,
         required: true,
     },
-    upvote: {
-        type: String,
-    },
-    downvote: {
-        type: String,
-    }
+    upvote: [{
+        type: Schema.Types.ObjectId,
+        required: true
+    }],
+    downvote: [{
+        type: Schema.Types.ObjectId,
+        required: true
+    }]
 });
 module.exports = mongoose.model("answer", answer);
