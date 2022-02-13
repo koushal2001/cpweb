@@ -23,6 +23,49 @@ exports.add_question = async(req, res) => {
     }
 
 };
+
+exports.questions = async(req, res) => {
+    try {
+        const questions = await question.find().sort([
+            ["updatedAt", -1]
+        ]);
+        const result = [];
+        for (var ques in questions) {
+            result.push({
+                url: questions[ques].url,
+                description: questions[ques].description,
+                buggycode: questions[ques].buggycode,
+                tags: questions[ques].tags,
+                user: await User.findById(questions[ques].user_id),
+                upvote: questions[ques].upvote.length,
+                downvote: questions[ques].downvote.length,
+            })
+        }
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ msg: error.message });
+    }
+}
+
+exports.questionbyid = async(req, res) => {
+    try {
+        constqid = req.header.qid // will come front front end
+        const questions = await question.findById(qid)
+        const result = [];
+        result.push({
+            url: questions.url,
+            description: questions.description,
+            buggycode: questions.buggycode,
+            tags: questions.tags,
+            user: await User.findById(questions.user_id),
+            upvote: questions.upvote.length,
+            downvote: questions.downvote.length,
+        });
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ msg: error.message });
+    }
+}
 exports.upvote = async(req, res) => {
     try {
         const user_id = req.id;

@@ -36,7 +36,10 @@ exports.register = async(req, res) => {
         })
         const jwt = await newuser.gettoken();
         await newuser.save();
-        return res.json(jwt);
+        return res.json({
+            jwt: jwt,
+            user: newuser
+        });
 
     } catch (error) {
         console.log(error);

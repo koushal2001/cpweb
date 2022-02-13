@@ -26,6 +26,24 @@ exports.add_answer = async(req, res) => {
     }
 
 };
+
+// exports.addcomment = async(req, res) => {
+//     try {
+//         const user_id = req.id;
+//         const answer_id = req.body.answer_id; // to be sent from qurey or header
+//         const commentbody = req.body.comment; // to be sent in body
+//         if (!comment) {
+//             return res.send("Comment Body empty");
+//         }
+//         const ans = await answer.findById(answer_id);
+//         ans.comment.push(commentbody);
+//         await ans.save();
+//         return res.send("Comment added");
+
+//     } catch (err) {
+//         return res.status(500).json({ msg: err.message });
+//     }
+// }
 exports.upvote = async(req, res) => {
     try {
         const user_id = req.id;

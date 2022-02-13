@@ -1,10 +1,11 @@
 const { randomFill } = require("crypto");
 const mongoose = require("mongoose");
+const { stringify } = require("querystring");
 const { Schema } = mongoose;
 const question = new Schema({
     url: {
         type: String,
-        unique: true,
+        required: true,
     },
     buggycode: {
         type: String,
@@ -28,8 +29,11 @@ const question = new Schema({
     downvote: [{
         type: Schema.Types.ObjectId,
         required: true
-    }]
-});
+    }],
+    // comment: [{
+    //     type: String
+    // }]
+}, { timestamps: true });
 
 
 

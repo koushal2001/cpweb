@@ -25,6 +25,9 @@ const answer = new Schema({
     downvote: [{
         type: Schema.Types.ObjectId,
         required: true
-    }]
-});
+    }],
+    // comment: [{
+    //     type: String
+    // }]
+}, { timestamps: true });
 module.exports = mongoose.model("answer", answer);

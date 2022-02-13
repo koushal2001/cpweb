@@ -15,7 +15,10 @@ exports.locallogin = async(req, res) => {
         }
         //sign jwt token
         const token = await user.gettoken();
-        return res.json(token);
+        return res.json({
+            jwt: token,
+            user: user
+        });
     } catch (error) {
         return res.status(500).json({ msg: error.message });
     }
