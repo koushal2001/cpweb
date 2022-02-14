@@ -15,6 +15,11 @@ const LoginScreen = ({ isShowLogin,handleLoginClick }) => {
         dispatch(login(email,password));
         handleLoginClick();
     }
+    const handleGoogle = () =>{
+        // e.preventDefault();/
+        dispatch(login(email,password,'google'));
+        
+    }
     return (
         isShowLogin && (
             <MainContainer>
@@ -34,10 +39,11 @@ const LoginScreen = ({ isShowLogin,handleLoginClick }) => {
                         <Button>Login</Button>
                     </ButtonContainer>
                     <HorizontalRule/>
-                    <ButtonContainer>
-                        <Button><FaGoogle/> &nbsp;Login with Google</Button>
-                    </ButtonContainer>
+                    
                 </form>
+                <ButtonContainer>
+                    <Button onClick={handleGoogle}><FaGoogle/> &nbsp;Login with Google</Button>
+                </ButtonContainer>
             </MainContainer>
         )
     )
@@ -107,7 +113,7 @@ const InputContainer = styled.div`
 
 const ButtonContainer = styled.div`
   margin: 1rem 0 2rem 0;
-  width: 100%;
+  width: 60%;
   display: flex;
   align-items: center;
   justify-content: center;

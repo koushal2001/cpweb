@@ -10,7 +10,7 @@ import {
     USER_REGISTER_FAIL,
 } from '../constants/userConstants'
 import axios from 'axios';
-export const login = (email,password) => async (dispatch) => {
+export const login = (email,password,google='') => async (dispatch) => {
     try {
         dispatch({
             type: USER_LOGIN_REQUEST,
@@ -21,14 +21,17 @@ export const login = (email,password) => async (dispatch) => {
                 'Content-Type': 'application/json',
             },
         }
-  
-        const { data } = await axios.post(
+        console.log(google);
+        const { data } = google === '' ?  await axios.post(
             '/login/locallogin',
             // /login/google
             { email, password },
             config
+        ): await axios.get(
+            '/login/google',
+            config
         );
-  
+        console.log(data);
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data,
