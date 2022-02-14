@@ -27,6 +27,50 @@ exports.add_answer = async(req, res) => {
 
 };
 
+exports.answers = async(req, res) => {
+    try {
+        const qid = req.headers.qid; // to be taken from frontend
+        const answers = await answer.find({ "question_id": qid }).sort([
+            ["updatedAt", -1]
+        ]);
+        const result = [];
+        for (var ans in answers) {
+            result.push({
+                id: answers[ans]._id,
+                description: answers[ans].description,
+                solution: answers[ans].solution,
+                user: await User.findById(answers[ans].user_id),
+                upvote: answers[ans].upvote.length,
+                downvote: answers[ans].downvote.length,
+            })
+        }
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ msg: error.message });
+    }
+};
+
+exports.answerbyid = async(req, res) => {
+    try {
+        const ansid = req.headers.ansid; // to be taken from frontend
+
+        const thisanswer = await answer.findById(ansid);
+        const result = {
+            id: thisanswer._id,
+            url: thisanswer.url,
+            description: thisanswer.description,
+            buggycode: thisanswer.buggycode,
+            tags: thisanswer.tags,
+            user: await User.findById(thisanswer.user_id),
+            upvote: thisanswer.upvote.length,
+            downvote: thisanswer.downvote.length,
+        };
+        return res.json(result);
+    } catch (error) {
+        return res.status(500).json({ msg: error.message });
+    }
+};
+
 // exports.addcomment = async(req, res) => {
 //     try {
 //         const user_id = req.id;

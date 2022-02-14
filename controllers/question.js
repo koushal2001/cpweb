@@ -32,6 +32,7 @@ exports.questions = async(req, res) => {
         const result = [];
         for (var ques in questions) {
             result.push({
+                id: questions[ques]._id,
                 url: questions[ques].url,
                 description: questions[ques].description,
                 buggycode: questions[ques].buggycode,
@@ -49,19 +50,22 @@ exports.questions = async(req, res) => {
 
 exports.questionbyid = async(req, res) => {
     try {
-        constqid = req.header.qid // will come front front end
-        const questions = await question.findById(qid)
-        const result = [];
-        result.push({
-            url: questions.url,
-            description: questions.description,
-            buggycode: questions.buggycode,
-            tags: questions.tags,
-            user: await User.findById(questions.user_id),
-            upvote: questions.upvote.length,
-            downvote: questions.downvote.length,
-        });
+        const qid = req.headers.qid; // will come front front end
+        // console.log(qid);
+        const thisquestion = await question.findById(qid)
+            // console.log(thisquestion);
+        const result = {
+            id: thisquestion._id,
+            url: thisquestion.url,
+            description: thisquestion.description,
+            buggycode: thisquestion.buggycode,
+            tags: thisquestion.tags,
+            user: await User.findById(thisquestion.user_id),
+            upvote: thisquestion.upvote.length,
+            downvote: thisquestion.downvote.length,
+        };
         return res.json(result);
+
     } catch (error) {
         return res.status(500).json({ msg: error.message });
     }

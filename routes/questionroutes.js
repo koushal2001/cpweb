@@ -7,7 +7,7 @@ router.post("/", auth, add_question);
 router.post("/up", auth, upvote);
 router.post("/down", auth, downvote);
 router.get("/list", questions);
-router.get("/listone", questions);
+router.get("/listone", questionbyid);
 
 
 module.exports = router;
