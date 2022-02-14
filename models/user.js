@@ -35,8 +35,11 @@ const userSchema = new Schema({
     },
     forgotpasswordexpiry: {
         type: Date,
+    },
+    isAdmin:{
+        type:Boolean,
+        default:false,
     }
-
 
 }, { timestamps: true })
 
