@@ -22,7 +22,7 @@ passport.use(new GoogleStrategy({
         }).then(user => {
             if (user) {
                 console.log("already exixts user");
-                return next(null, user);
+                return next("User already exists", user);
             } else {
                 User.create({
                         email: profile._json.email,

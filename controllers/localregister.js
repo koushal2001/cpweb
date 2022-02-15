@@ -3,11 +3,19 @@ const cloudinary = require("cloudinary").v2;
 
 exports.register = async(req, res) => {
     const { email, first_name, last_name, password } = req.body;
+
     if (!password) {
         res.send("password required") // need to implement error class to raise custom or default errors needs to be done
     }
-
+    const user = User.findOne({
+        email: profile._json.email
+    })
+    if (user) {
+        console.log("already exixts user");
+        return res.json({ msg: "user laready exists" });
+    }
     try {
+
         let result;
         if (!req.files) {
             // result.public_id = 01;
