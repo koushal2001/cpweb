@@ -5,8 +5,6 @@ exports.googlelogin = async(req, res) => {
 
 exports.callback = async(req, res) => {
     const jwt = await req.user.gettoken();
-    return res.json({
-        jwt: jwt,
-        user: req.user
-    });
+    console.log("fcdnjc", req.user, "dnckj");
+    res.redirect("http://localhost:3000/token=" + jwt);
 }
