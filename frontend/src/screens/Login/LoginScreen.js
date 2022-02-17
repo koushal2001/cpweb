@@ -1,21 +1,49 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector }   from 'react-redux';
 import { FaGoogle} from 'react-icons/fa'
 import { login } from '../../actions/userActions';
+import {useLocation, useNavigate} from 'react-router-dom'
+import { USER_LOGIN_SUCCESS } from '../../constants/userConstants';
 const LoginScreen = ({ isShowLogin,handleLoginClick }) => {
     const [email,setEmail]  = useState('');
     const [password,setPassword]  = useState('');
     const userLogin = useSelector((state) => state.userLogin)
     const { loading, error } = userLogin
     const dispatch = useDispatch();
+    
+    const searchParams = new URLSearchParams(useLocation().search);
+    
+    const token = searchParams.get('token') ?searchParams.get('token') : ''
+    const email1 = searchParams.get('email') ?searchParams.get('email') : ''
+    const firstname = searchParams.get('firstname') ?searchParams.get('firstname') : ''
+    const lastname = searchParams.get('lastname') ?searchParams.get('lastname') : ''
+    const id = searchParams.get('id') ?searchParams.get('id') : ''
+    const photo = searchParams.get('photo') ?searchParams.get('photo') : ''
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if(token !== '')
+        {
+            const data = {jwt:token,user:{_id:id,email:email1,first_name:firstname,last_name:lastname,photo:photo}}
+            dispatch({
+                type:USER_LOGIN_SUCCESS,
+                payload :data
+            })
+            localStorage.setItem('userInfo',JSON.stringify(data));
+            navigate('/');
+        }
+    },[dispatch,token,email1,firstname,lastname,photo,id,navigate])
+    
     const submitHandler = (e) =>{
         e.preventDefault();
         
         dispatch(login(email,password));
         handleLoginClick();
     }
-    const handleGoogle = () => window.open("http://localhost:5000/login/google","_self")
+    const handleGoogle = () => {
+        window.open("http://localhost:5000/login/google","_self")
+        
+    }
     
     return ( 
         isShowLogin && (
@@ -54,8 +82,8 @@ const MainContainer = styled.div`
     margin: auto;
     left: 0;
     right: 0;
-    background-color: #c82090; /* For browsers that do not support gradients */
-    background-image:linear-gradient(to right, #c82090 , #6a14d1);
+    background-color: #ebebeb; /* For browsers that do not support gradients */
+    
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border-radius: 25px;
     color: white;

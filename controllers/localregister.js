@@ -7,8 +7,9 @@ exports.register = async(req, res) => {
     if (!password) {
         res.send("password required") // need to implement error class to raise custom or default errors needs to be done
     }
-    const user = User.findOne({
-        email: profile._json.email
+    const user = await User.findOne({
+        // email: profile._json.email
+        email:email
     })
     if (user) {
         console.log("already exixts user");

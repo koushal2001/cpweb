@@ -7,9 +7,8 @@ exports.locallogin = async(req, res) => {
         if (!user) {
             return res.status(400).json({ error: "Invalid Credentials" });
         }
-
         const isMatch = await user.validatepassword(password);
-
+        
         if (!isMatch) {
             return res.status(400).json({ error: "Invalid Credentials" });
         }

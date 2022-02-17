@@ -31,6 +31,8 @@ const Navbar = ({ handleLoginClick,handleRegisterClick }) => {
                 {
                     userInfo ? (
                         <>
+                            <img src={userInfo.user.photo.id===null?userInfo.user.photo:userInfo.user.photo.secure_url} width='40px' height='40px' style={{objectFit:'contain',borderRadius:'50px'}} alt = 'profile pic' />
+                            <MenuLink to='/profile'>{userInfo.user.first_name}{' '}{userInfo.user.last_name}</MenuLink>
                             <MenuLink to='/' onClick={logoutHandler}>Logout</MenuLink>
                         </>
                     ) : (

@@ -21,7 +21,6 @@ const userSchema = new Schema({
 
     password: {
         type: String,
-        select: false,
     },
     photo: {
         id: {
@@ -50,6 +49,9 @@ userSchema.pre('save', async function(next) {
 })
 
 userSchema.methods.validatepassword = async function(userpassword) {
+
+    const match = await bcrypt.compare(userpassword, this.password)
+     
     return await bcrypt.compare(userpassword, this.password)
 }
 
